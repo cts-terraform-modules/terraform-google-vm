@@ -75,7 +75,7 @@ resource "google_compute_instance_group" "instance_group" {
   name     = "${local.hostname}-${format("%03d", count.index + 1)}"
   project  = var.project_id
   zone     = var.zone != "" ? var.zone : element(data.google_compute_zones.available.names, count.index)
-  instances = matchkeys(
+  instances = var.zone != "" ? google_compute_instance_from_template.compute_instance.*.self_link : matchkeys(
     google_compute_instance_from_template.compute_instance.*.self_link,
     google_compute_instance_from_template.compute_instance.*.zone,
     [data.google_compute_zones.available.names[count.index]],
