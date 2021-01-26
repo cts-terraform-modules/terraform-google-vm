@@ -82,7 +82,3 @@ variable "zone" {
   type    = string
   default = ""
 }
-
-variable "ignore_changes" {
-  type = list(string)
-}
