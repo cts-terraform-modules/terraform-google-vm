@@ -104,6 +104,10 @@ variable "additional_disks" {
   default = []
 }
 
+variable "regional_disks" {
+  type = list(string)
+}
+
 ####################
 # network_interface
 ####################

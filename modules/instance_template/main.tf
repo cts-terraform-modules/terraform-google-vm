@@ -88,6 +88,15 @@ resource "google_compute_instance_template" "tpl" {
     }
   }
 
+  dynamic "disk" {
+    for_each = var.regional_disks
+    content {
+      source      = disk.value
+      auto_delete = false
+      boot        = false
+    }
+  }
+
   dynamic "service_account" {
     for_each = [var.service_account]
     content {
