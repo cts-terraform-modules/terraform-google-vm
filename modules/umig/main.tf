@@ -69,7 +69,7 @@ resource "google_compute_instance_from_template" "compute_instance" {
   source_instance_template = var.instance_template
 
   lifecycle {
-    ignore_changes = var.ignore_changes
+    ignore_changes = [var.ignore_changes]
   }
 }
 
