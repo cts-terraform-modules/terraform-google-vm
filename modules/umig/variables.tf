@@ -77,3 +77,8 @@ variable "access_config" {
   })))
   default = []
 }
+
+variable "zone" {
+  type    = string
+  default = ""
+}

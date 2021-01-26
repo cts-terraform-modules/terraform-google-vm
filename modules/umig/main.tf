@@ -47,7 +47,7 @@ resource "google_compute_instance_from_template" "compute_instance" {
   provider = google
   count    = local.num_instances
   name     = "${local.hostname}-${format("%03d", count.index + 1)}"
-  zone     = data.google_compute_zones.available.names[count.index % length(data.google_compute_zones.available.names)]
+  zone     = var.zone != "" ? var.zone : data.google_compute_zones.available.names[count.index % length(data.google_compute_zones.available.names)]
 
   network_interface {
     network            = var.network
@@ -73,7 +73,7 @@ resource "google_compute_instance_group" "instance_group" {
   count    = local.instance_group_count
   name     = "${local.hostname}-instance-group-${format("%03d", count.index + 1)}"
   project  = var.project_id
-  zone     = element(data.google_compute_zones.available.names, count.index)
+  zone     = var.zone != "" ? var.zone : element(data.google_compute_zones.available.names, count.index)
   instances = matchkeys(
     google_compute_instance_from_template.compute_instance.*.self_link,
     google_compute_instance_from_template.compute_instance.*.zone,
