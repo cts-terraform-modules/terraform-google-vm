@@ -82,3 +82,8 @@ variable "zone" {
   type    = string
   default = ""
 }
+
+variable "no_suffix" {
+  type    = bool
+  default = false
+}

@@ -46,8 +46,8 @@ data "google_compute_zones" "available" {
 resource "google_compute_instance_from_template" "compute_instance" {
   provider = google
   project  = var.project_id
-  count    = local.num_instances
-  name     = "${local.hostname}-${format("%03d", count.index + 1)}"
+  count    = var.no_suffix == true ? 1 : local.num_instances
+  name     = var.no_suffix == true ? local.hostname : "${local.hostname}-${format("%03d", count.index + 1)}"
   zone     = var.zone != "" ? var.zone : data.google_compute_zones.available.names[count.index % length(data.google_compute_zones.available.names)]
 
   network_interface {
