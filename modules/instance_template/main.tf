@@ -67,17 +67,18 @@ resource "google_compute_instance_template" "tpl" {
   dynamic "disk" {
     for_each = local.all_disks
     content {
-      auto_delete  = lookup(disk.value, "auto_delete", null)
-      boot         = lookup(disk.value, "boot", null)
-      device_name  = lookup(disk.value, "device_name", null)
-      disk_name    = lookup(disk.value, "disk_name", null)
-      disk_size_gb = lookup(disk.value, "disk_size_gb", null)
-      disk_type    = lookup(disk.value, "disk_type", null)
-      interface    = lookup(disk.value, "interface", null)
-      mode         = lookup(disk.value, "mode", null)
-      source       = lookup(disk.value, "source", null)
-      source_image = lookup(disk.value, "source_image", null)
-      type         = lookup(disk.value, "type", null)
+      auto_delete       = lookup(disk.value, "auto_delete", null)
+      boot              = lookup(disk.value, "boot", null)
+      device_name        = lookup(disk.value, "device_name", null)
+      disk_name         = lookup(disk.value, "disk_name", null)
+      disk_size_gb      = lookup(disk.value, "disk_size_gb", null)
+      disk_type         = lookup(disk.value, "disk_type", null)
+      interface         = lookup(disk.value, "interface", null)
+      mode              = lookup(disk.value, "mode", null)
+      source            = lookup(disk.value, "source", null)
+      source_image      = lookup(disk.value, "source_image", null)
+      type              = lookup(disk.value, "type", null)
+      resource_policies = lookup(disk.value, "resource_policies", null)
 
       dynamic "disk_encryption_key" {
         for_each = lookup(disk.value, "disk_encryption_key", [])
