@@ -111,6 +111,9 @@ resource "google_compute_instance_template" "tpl" {
 
   lifecycle {
     create_before_destroy = "true"
+    ignore_changes = [
+      disk.0.source_image
+    ]
   }
 
   # scheduling must have automatic_restart be false when preemptible is true.
