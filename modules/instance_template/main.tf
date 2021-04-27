@@ -34,7 +34,7 @@ data "google_compute_image" "image_family" {
 locals {
   boot_disk = [
     {
-      source_image = var.source_image != "" ? data.google_compute_image.image.self_link : data.google_compute_image.image_family.self_link
+      source_image = var.source_image
       disk_size_gb = var.disk_size_gb
       disk_type    = var.disk_type
       auto_delete  = var.auto_delete
